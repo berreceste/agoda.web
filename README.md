@@ -6,64 +6,52 @@ This is a template to get started with a Gauge project that uses Selenium as the
 
     gauge --install java_selenium
 
-## Building on top of this template
-
-### Define a Specification
-
-- Create a new file under `specs` directory, say "hello_world.spec".
-- Define your specification in this file, an example below
-
-```
-Sample Specification
-====================
-
-This is an executable specification file. This file follows markdown syntax. Every heading in this file denotes a scenario. Every bulleted point denotes a step.
-To execute this specification, use
-	mvn test
-
-* Navigate to "http://getgauge.io"
-
-Search for Gauge Documentation
-------------------------------
-
-* Go to Gauge Get Started Page
-
-```
-Read more about [Specifications](http://getgauge.io/documentation/user/current/specifications/README.html)
-
-### Writing the implementations
-
-This is where the java implementation of the steps would be implemented. Since this is a Selenium based project, the java implementation would invoke Selenium APIs as required.
-
-_We recommend considering modelling your tests using the [Page Object](https://github.com/SeleniumHQ/selenium/wiki/PageObjects) pattern, and the [Webdriver support](https://github.com/SeleniumHQ/selenium/wiki/PageFactory) for creating them._
-
-- Create a new class called, say, `SampleTest.java`
-- Add the Step implementation in the class, an example is below:
-```
-import com.thoughtworks.gauge.Gauge;
-import com.thoughtworks.gauge.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-
-import static org.junit.Assert.assertTrue;
-
-public class SampleTest {
-
-    @Step("Navigate to <url>")
-    public void navigateTo(String url) {
-        com.web.base.utils.driver.Driver.driver.get(url);
-        assertTrue(com.web.base.utils.driver.Driver.driver.getTitle().contains("Gauge"));
-    }
-
-    @Step("Go to Gauge Get Started Page")
-    public void gotoGetStartedPage() throws InterruptedException {
-        WebElement getStartedButton = com.web.base.utils.driver.Driver.driver.findElement(By.xpath("//*[@id=\"content\"]/section[1]/section/div[2]/a[1]"));
-        getStartedButton.click();
-        Gauge.writeMessage("Page title is ", com.web.base.utils.driver.Driver.driver.getTitle());
-    }
-}
-```
-
-- Note that every Gauge step implementation is annotated with a `Step` attribute that takes the Step text pattern as a parameter.
-Read more about [Step implementations in Java](http://getgauge.io/documentation/user/current/test_code/java/java.html)
+# Scenario3Page README
+ 
+## Overview
+ 
+The `Scenario3Page` class is a Selenium page object used for interacting with specific elements on a web page and performing certain test operations.
+ 
+## Class Structure
+ 
+- **Log**: A logging instance created using Apache Commons Logging.
+- **TestiniumLabel** and **TestiniumButton**: Custom classes for interacting with labels and buttons on the page.
+- **Driver**: The WebDriver instance used for browser interactions.
+- **spans**: A list that stores specific `WebElement` instances on the page.
+ 
+## Features
+ 
+- **Label_Destination**: Represents the "Destination" text input field on the web page.
+- **BTN_Destination**: Represents the destination button.
+- **BTN_EnterDate**: Represents the date picker button.
+- **spans**: A list of `WebElement` instances representing available dates on the page.
+ 
+## Methods
+ 
+### `getInstance()`
+ 
+A static method that returns the singleton instance of the `ExamplePage` class.
+ 
+### `mainPage()`
+ 
+Performs the following steps:
+1. **Enter Destination**: Uses `Label_Destination` to enter the text "Antalya" and clicks the `BTN_Destination`.
+2. **Select Date**: Clicks the `BTN_EnterDate` and collects available dates into the `spans` list.
+3. **Process Dates**: Iterates over the list, prints each date to the console, and clicks on the date "5" if it matches.
+ 
+## Usage
+ 
+1. **Selenium and WebDriver**: Ensure Selenium WebDriver is correctly set up for the `Scenario3Page` class to function.
+2. **Testinium Classes**: Make sure the `TestiniumLabel` and `TestiniumButton` classes are included in the project and properly configured.
+ 
+## Requirements
+ 
+- Java 8 or later
+- Selenium WebDriver
+- Apache Commons Logging
+- Testinium classes and configurations
+ 
+## Notes
+ 
+- **Exception Handling**: The `mainPage()` method handles `InterruptedException`, typically caused by `Thread.sleep()` calls. In production code, a more reliable waiting strategy should be used.
 
