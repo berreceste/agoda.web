@@ -1,0 +1,13 @@
+package com.web.base.pagesteps;
+import com.thoughtworks.gauge.ContinueOnFailure;
+import com.thoughtworks.gauge.Step;
+import com.web.base.pages.LoginPage;
+import com.web.base.pages.MainPage;
+public class LoginPageSteps extends BaseSteps {
+    @ContinueOnFailure({AssertionError.class})
+    @Step("LoginPage")
+    public void mainPage() throws InterruptedException {
+        LoginPage.Login();
+
+}
+}
